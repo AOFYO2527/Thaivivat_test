@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tvv_test/component/alertDialog.dart';
 
 class MyRegistrationPage extends StatefulWidget {
@@ -80,6 +81,7 @@ class _MyRegistrationPageState extends State<MyRegistrationPage> {
                 ),
               ),
               Container(
+                height: 400,
                 margin: EdgeInsets.symmetric(horizontal: 18),
                 padding: EdgeInsets.all(32),
                 decoration: BoxDecoration(
@@ -132,7 +134,7 @@ class _MyRegistrationPageState extends State<MyRegistrationPage> {
                     Expanded(
                       flex: 2,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('ชื่อ-สกุล'),
@@ -173,61 +175,64 @@ class _MyRegistrationPageState extends State<MyRegistrationPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 36,
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2<String>(
-                          isExpanded: true,
-                          customButton: Icon(Icons.more_horiz),
-                          items: myItem
-                              .map((String item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          getActionIcon(item)[0],
-                                          color: getActionIcon(item)[1],
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Text(
-                                          item,
-                                          style: TextStyle(
-                                            color: Colors.black87,
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: SizedBox(
+                            width: 36,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2<String>(
+                                isExpanded: true,
+                                customButton: Icon(Icons.more_horiz),
+                                items: myItem
+                                    .map((String item) => DropdownMenuItem<String>(
+                                          value: item,
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                getActionIcon(item)[0],
+                                                color: getActionIcon(item)[1],
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Text(
+                                                item,
+                                                style: TextStyle(
+                                                  color: Colors.black87,
+                                                ),
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ],
                                           ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
+                                        ))
+                                    .toList(),
+                                onChanged: (value) async {
+                                  await actionTable(action: value);
+                                },
+                                iconStyleData: const IconStyleData(
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                ),
+                                buttonStyleData: ButtonStyleData(
+                                  height: 45,
+                                  // width: 180,
+                                  padding: const EdgeInsets.only(left: 14, right: 14),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: Colors.black26,
                                     ),
-                                  ))
-                              .toList(),
-                          onChanged: (value) async {
-                            await actionTable(action: value);
-                          },
-                          iconStyleData: const IconStyleData(
-                            icon: Icon(Icons.keyboard_arrow_down),
-                          ),
-                          buttonStyleData: ButtonStyleData(
-                            height: 45,
-                            // width: 180,
-                            padding: const EdgeInsets.only(left: 14, right: 14),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: Colors.black26,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                dropdownStyleData: DropdownStyleData(
+                                  maxHeight: 300,
+                                  width: 200,
+                                  elevation: 2,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
                               ),
-                              color: Colors.white,
                             ),
                           ),
-                          dropdownStyleData: DropdownStyleData(
-                            maxHeight: 300,
-                            width: 200,
-                            elevation: 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),
